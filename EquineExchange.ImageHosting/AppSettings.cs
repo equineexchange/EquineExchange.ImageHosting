@@ -9,6 +9,8 @@
     {
         public static string AzureReader([CallerMemberName] string settingName = null) => GetString(settingName);
 
+        public static string DiskCache([CallerMemberName] string settingName = null) => GetString(settingName);
+
         public static string ImageResizer([CallerMemberName] string settingName = null) => GetString(settingName);
 
         private static string GetString(string settingName, [CallerMemberName] string sectionName = null)

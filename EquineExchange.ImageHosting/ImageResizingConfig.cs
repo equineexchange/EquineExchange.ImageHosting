@@ -5,6 +5,7 @@
     using ImageResizer.Configuration;
     using ImageResizer.Plugins.AzureReader2;
     using ImageResizer.Plugins.Basic;
+    using ImageResizer.Plugins.DiskCache;
 
     public class ImageResizingConfig : IHttpModule
     {
@@ -25,6 +26,16 @@
             }
 
             new AzureReader2Plugin(AzureReaderSettings.ToNameValueCollection()).Install(config);
+
+            if (DiskCacheSettings.Enabled)
+            {
+                var diskCache = new DiskCache
+                {
+                    AsyncWrites = DiskCacheSettings.AsyncWrites
+                };
+
+                diskCache.Install(config);
+            }
         }
     }
 }

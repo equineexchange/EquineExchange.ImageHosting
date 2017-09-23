@@ -18,6 +18,8 @@ The license, [AzureReader2](https://imageresizing.net/docs/v4/plugins/azurereade
 | app:azureReader.redirectToBlobIfUnmodified | false                   | Since this is meant to be the source of a CDN there's no reason to redirect here                |
 | app:azureReader.requireImageExtension      | true                    | Helps ensure the right content type is served to the client                                     |
 | app:azureReader.untrustedData              | true                    | Re-encodes all the images to help limit malicious uploads from possibly harming your users      |
+| app:diskCache.enabled                      | false                   | Turns the DiskCache plugin on or off                                                            |
+| app:diskCache.asyncWrites                  | true                    | Enables writing to disk via an async call                                                       |
 
 ### Example
 
