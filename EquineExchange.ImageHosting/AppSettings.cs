@@ -1,23 +1,32 @@
 ﻿namespace EquineExchange.ImageHosting
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     using Microsoft.Azure;
 
     public static class AppSettings
     {
-        public static string AzureReader(string settingName) => GetString("app:azureReader." + settingName);
+        public static string AzureReader([CallerMemberName] string settingName = null) => GetString(settingName);
 
-        public static string ImageResizer(string settingName) => GetString("app:imageResizer." + settingName);
+        public static string ImageResizer([CallerMemberName] string settingName = null) => GetString(settingName);
 
-        private static string GetString(string settingName, string defaultValue = null)
+        private static string GetString(string settingName, [CallerMemberName] string sectionName = null)
         {
-            var temp = CloudConfigurationManager.GetSetting(settingName);
+            var name = string.Concat("app:", FixCasing(sectionName), '.', FixCasing(settingName));
 
-            if (string.IsNullOrWhiteSpace(temp))
-            {
-                temp = defaultValue;
-            }
+            return CloudConfigurationManager.GetSetting(name);
+        }
 
-            return temp;
+        private static string FixCasing(string name)
+        {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+
+            var chars = name.ToCharArray();
+
+            chars[0] = char.ToLowerInvariant(chars[0]);
+
+            return new string(chars);
         }
     }
 }

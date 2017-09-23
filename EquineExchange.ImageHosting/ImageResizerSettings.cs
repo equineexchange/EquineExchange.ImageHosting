@@ -2,6 +2,6 @@
 {
     public static class ImageResizerSettings
     {
-        public static string License { get; } = AppSettings.ImageResizer("license");
+        public static string License { get; } = AppSettings.ImageResizer();
     }
 }
