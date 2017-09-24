@@ -7,17 +7,29 @@
 
     public static class AppSettings
     {
-        public static string AzureReader([CallerMemberName] string settingName = null) => GetString(settingName);
+        public static string AzureReader([CallerMemberName] string settingName = null) => GetSectionString(settingName);
 
-        public static string DiskCache([CallerMemberName] string settingName = null) => GetString(settingName);
+        public static string DiskCache([CallerMemberName] string settingName = null) => GetSectionString(settingName);
 
-        public static string ImageResizer([CallerMemberName] string settingName = null) => GetString(settingName);
+        public static string ImageResizer([CallerMemberName] string settingName = null) => GetSectionString(settingName);
 
-        private static string GetString(string settingName, [CallerMemberName] string sectionName = null)
+        public static string GetString(string settingName, string defaultValue = null)
+        {
+            var temp = CloudConfigurationManager.GetSetting(settingName);
+
+            if (string.IsNullOrWhiteSpace(temp))
+            {
+                return defaultValue;
+            }
+
+            return temp;
+        }
+
+        private static string GetSectionString(string settingName, [CallerMemberName] string sectionName = null)
         {
             var name = string.Concat("app:", FixCasing(sectionName), '.', FixCasing(settingName));
 
-            return CloudConfigurationManager.GetSetting(name);
+            return GetString(name);
         }
 
         private static string FixCasing(string name)

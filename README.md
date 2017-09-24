@@ -23,6 +23,11 @@ The license, [AzureReader2](https://imageresizing.net/docs/v4/plugins/azurereade
 | app:diskCache.enabled                      | false                   | Turns the DiskCache plugin on or off                                                            |
 | app:diskCache.asyncWrites                  | true                    | Enables writing to disk via an async call                                                       |
 
+### Application Insights
+
+When setting up Application Insights the environment variable `APPINSIGHTS_INSTRUMENTATIONKEY` is usually added to your App Service.
+If this settings exists then Application Insights will light up and start logging.
+
 ### Example
 
 ```xml

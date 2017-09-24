@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationInsights\ApplicationVersionTelemetryInitializer.cs" />
+    <Compile Include="ApplicationInsightsConfig.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="AzureReaderSettings.cs" />
     <Compile Include="DiskCacheSettings.cs" />
@@ -187,7 +188,7 @@
     <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.SnapshotCollector.1.0.10\build\Microsoft.ApplicationInsights.SnapshotCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.SnapshotCollector.1.0.10\build\Microsoft.ApplicationInsights.SnapshotCollector.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.ApplicationInsights.SnapshotCollector.1.0.10\build\Microsoft.ApplicationInsights.SnapshotCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.SnapshotCollector.1.0.10\build\Microsoft.ApplicationInsights.SnapshotCollector.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
