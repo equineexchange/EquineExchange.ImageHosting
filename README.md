@@ -1,6 +1,6 @@
 ﻿# EquineExchange.ImageHosting
 
-[![Build status](https://ci.appveyor.com/api/projects/status/oyi5tffbv7hu3tb7?svg=true)](https://ci.appveyor.com/project/xt0rted/equineexchange-imagehosting)
+[![Build status](https://ci.appveyor.com/api/projects/status/oyi5tffbv7hu3tb7/branch/master?svg=true)](https://ci.appveyor.com/project/xt0rted/equineexchange-imagehosting/branch/master)
 
 EquineExchange.ImageHosting is a simple image host backed by [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) and [ImageResizer](https://imageresizing.net/).
 It's sufficient to be used as-is for development and test environments where user load isn't a concern, but for production use you should put it behind a CDN.
