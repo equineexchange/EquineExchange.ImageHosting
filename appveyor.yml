@@ -49,6 +49,17 @@ build:
   publish_wap: true
 
 deploy:
+  - provider: GitHub
+    release: v$(RELEASE_VERSION)
+    description: 'Release notes'
+    auth_token:
+      secure: jpkoLqMlufg5tbpl9vPJcvDMVDYqFGzGt7/269EuOkvrA0EgUDPBVD82tl68F4yp
+    artifact: /.*\.zip/
+    draft: false
+    on:
+      branch: master
+      appveyor_repo_tag: true
+
   - provider: WebDeploy
     name: eei-images-staging
     on:
