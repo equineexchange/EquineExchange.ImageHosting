@@ -1,0 +1,61 @@
+﻿image: Visual Studio 2017
+
+branches:
+  only:
+    - master
+    - production
+
+version: '{build}'
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: $(BUILD_VERSION)
+  assembly_file_version: $(BUILD_VERSION)
+  assembly_informational_version: $(RELEASE_VERSION)
+
+configuration: Release
+
+install:
+  - ps: |
+      set -name semver -scope global -value (get-content .\semver.txt)
+
+      if (!$semver) {
+        Write-Error 'semver.txt was not found in parent directory'
+        Exit 1
+      }
+
+      $env:BUILD_VERSION = $semver
+      "Build version $env:BUILD_VERSION"
+
+      $buildNumber = ([int]$env:APPVEYOR_BUILD_NUMBER).ToString()
+      if ($buildNumber.Length -lt 5) {
+        $buildNumber = $buildNumber.PadLeft(5, '0')
+      }
+
+      $env:RELEASE_VERSION = $env:BUILD_VERSION
+
+      if ($env:APPVEYOR_REPO_TAG -ne 'true') {
+          $env:RELEASE_VERSION += "-build" + $buildNumber
+      }
+
+      "Release version $env:RELEASE_VERSION"
+
+before_build:
+  - ps: nuget restore
+
+build:
+  parallel: true
+  publish_wap: true
+
+deploy:
+  - provider: WebDeploy
+    name: eei-images-staging
+    on:
+      branch: production
+
+notifications:
+  - provider: Slack
+    auth_token:
+      secure: Iko0UQdMipH6ZQ5h+UnU47EcrYV4OTFXxAZVC/3ZyQQNNXpH2nXvHnPiuOmjShM24s8WBfu8L/eQqEvAY+JLQw==
+    channel: '#dev'
