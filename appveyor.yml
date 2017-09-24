@@ -50,13 +50,14 @@ build:
 
 deploy:
   - provider: GitHub
-    release: v$(RELEASE_VERSION)
-    description: 'Release notes'
+    tag: v$(RELEASE_VERSION)
+    description: 'Release notes for v$(RELEASE_VERSION)'
     auth_token:
       secure: jpkoLqMlufg5tbpl9vPJcvDMVDYqFGzGt7/269EuOkvrA0EgUDPBVD82tl68F4yp
     artifact: /.*\.zip/
-    draft: false
+    force_update: true
     on:
+      branch: master
       appveyor_repo_tag: true
 
   - provider: WebDeploy
