@@ -57,7 +57,6 @@ deploy:
     artifact: /.*\.zip/
     draft: false
     on:
-      branch: master
       appveyor_repo_tag: true
 
   - provider: WebDeploy
