@@ -60,7 +60,7 @@ deploy:
       branch: master
       appveyor_repo_tag: true
 
-  - provider: WebDeploy
+  - provider: Environment
     name: eei-images-staging
     on:
       branch: production
