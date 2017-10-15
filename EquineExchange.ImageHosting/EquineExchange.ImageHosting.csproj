@@ -24,6 +24,9 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <BuildId Condition="$(BuildId) == ''">$(SCM_COMMIT_ID)</BuildId>
+    <GenerateBuildInfoConfigFile>True</GenerateBuildInfoConfigFile>
+    <IncludeServerNameInBuildInfo>True</IncludeServerNameInBuildInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
