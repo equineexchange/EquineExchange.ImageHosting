@@ -1,15 +1,35 @@
 ﻿root = true
 
 [*]
-charset = utf-8-bom
+charset = utf-8
 end_of_line = crlf
 insert_final_newline = true
 indent_size = 4
 indent_style = space
 trim_trailing_whitespace = true
 
-[*.csproj]
+# Proper encoding when using ‘’ and “”
+[*.{cs,cshtml}]
+charset = utf-8-bom
+
+[*.{csproj,props}]
+indent_size = 2
+
+[*.json]
+indent_size = 2
+
+[*.props]
 indent_size = 2
 
 [*.yml]
 indent_size = 2
+
+[packages.config]
+indent_size = 2
+insert_final_newline = false
+
+# NPM changes CRLF to LF so this prevents phantom commits when you add the following to .gitattributes
+# package.json text eol=lf
+# package-lock.json text eol=lf
+[{package.json,package-lock.json}]
+end_of_line = lf
